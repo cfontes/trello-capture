@@ -234,7 +234,12 @@ $('#on-top').on('change', function () {
   localStorage.cardOnTop = $('#on-top').prop('checked');
 });
 
-$('#createCard').on('click', function () {
+$('#createCard').on('click', createCard());
+$('body').on('keypress', function(evt) {
+  if ((evt.keyCode == 10 || evt.keyCode == 13) && event.ctrlKey) { createCard(); }
+});
+
+function createCard() {
   if (!ms.currentBase64Image) { return; }
   if (!validateCardName() || !validateCardDesc()) { return; }
   
@@ -257,7 +262,8 @@ $('#createCard').on('click', function () {
       });
     });
   });
-});
+}
+
 
 // Initialization
 function initializeBoardsAndLists() {
